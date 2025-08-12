@@ -1,8 +1,8 @@
-PWD /Users/andiasas/Library/CloudStorage/Box-Box/PERSONAL
+PWD /Users/andiasas/Documents/website repo/andiasalfitra.github.io/solidstate
 INPUT /usr/local/texlive/2024/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/andiasas/Library/CloudStorage/Box-Box/PERSONAL/festkoerperphysik.tex
+INPUT /Users/andiasas/Documents/website repo/andiasalfitra.github.io/solidstate/festkoerperphysik.tex
 OUTPUT festkoerperphysik.log
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls

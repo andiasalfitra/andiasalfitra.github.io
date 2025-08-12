@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1755023080.99964 "/Users/andiasas/Library/CloudStorage/Box-Box/PERSONAL/festkoerperphysik.tex" "festkoerperphysik.pdf" "festkoerperphysik" 1755023081.57149 0
-  "/Users/andiasas/Library/CloudStorage/Box-Box/PERSONAL/festkoerperphysik.tex" 1755023080.84184 23539 891ca88b4335aec3eacc830c85126845 ""
+["pdflatex"] 1755023941.53258 "/Users/andiasas/Documents/website repo/andiasalfitra.github.io/solidstate/festkoerperphysik.tex" "festkoerperphysik.pdf" "festkoerperphysik" 1755023942.05084 0
+  "/Users/andiasas/Documents/website repo/andiasalfitra.github.io/solidstate/festkoerperphysik.tex" 1755023601.8341 23539 891ca88b4335aec3eacc830c85126845 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -75,9 +75,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1737990020.19479 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1737990005 8221424 af61d8b80785787e17b3c44cd9b8ed3a ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "festkoerperphysik.aux" 1755023081.51614 2164 e5b1856fda52b7a08c2275e3428f3a31 "pdflatex"
-  "festkoerperphysik.tex" 1755023080.84184 23539 891ca88b4335aec3eacc830c85126845 ""
-  "festkoerperphysik.toc" 1755023081.51677 1352 8cda3a2acdaf127e7e8f3294e7f865e9 "pdflatex"
+  "festkoerperphysik.aux" 1755023941.9716 2164 e5b1856fda52b7a08c2275e3428f3a31 "pdflatex"
+  "festkoerperphysik.tex" 1755023601.8341 23539 891ca88b4335aec3eacc830c85126845 ""
+  "festkoerperphysik.toc" 1755023941.97245 1352 8cda3a2acdaf127e7e8f3294e7f865e9 "pdflatex"
   (generated)
   "festkoerperphysik.aux"
   "festkoerperphysik.log"
