@@ -1,0 +1,401 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym,amsfonts,amssymb,amsthm,amsmath, enumerate, graphicx, braket}
+
+\setlength{\parindent}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.8in}
+\setlength{\topmargin}{0in}
+\setlength{\headheight}{18pt}
+
+
+
+\title{Notes on Solid State Physics}
+\author{Andias Santoso (UIUC)}
+
+\begin{document}
+\maketitle
+
+\vspace{0.5 in}
+
+\textit{Foreword.} This is a small project originally by Andias in an effort to learn condensed matter physics. "Teaching is the best way of learning" he thinks. This book is mainly based on Simon's ``The Oxford Solid State Basics", but also takes inspiration from other books such as Ashcroft and Mermin's ``Solid State Physics". 
+
+\vspace{0.25 in}
+
+\textit{Prerequisites.} I honestly don't know. I think readers should have some familiarity with classical mechanics, thermal/statistical physics, and quantum mechanics.
+
+
+\newpage
+\tableofcontents
+
+\newpage
+
+\section{Models of Matter}
+
+\subsection{Einstein model}
+
+Einstein treats matter as groups (or rather a ``sea") of free quantum harmonic oscillators that does not interact with one another. We will now look at the features of the Einstein model.
+
+\vspace{0.25 in}
+
+The energy of the quantum harmonic oscillator in one dimension, denoted as $E_n(\omega)$, is given by:
+\begin{equation*}
+    E_n(\omega)=\hbar \omega(n+1/2)
+\end{equation*}
+
+One can then check that for a 3-dimensional harmonic oscillator, the energy $E_{n_1,n_2,n_3}(\omega)$ is given by:
+\begin{equation*}
+    E_{n_1,n_2,n_3}(\omega)=\hbar\omega(3/2+n_1+n_2+n_3)
+\end{equation*}
+
+We can then construct a partition function for this system:
+\begin{align*}
+    Z&=\sum_{n_1,n_2,n_3}e^{-\beta E_{n_1,n_2,n_3}}\\
+    &=e^{-3\beta\hbar\omega/2}\sum_{n_1,n_2,n_3}e^{-\beta\hbar\omega(n_1+n_2+n_3)}\\
+    &=(2\sinh{(\beta\hbar\omega/2)})^{-3}
+\end{align*}
+
+From this, we can find that the expected energy of the system to be
+\begin{align*}
+    \langle E \rangle&=-\frac{1}{Z}\frac{\partial Z}{\partial\beta}\\
+    &=\frac{3}{2}\hbar\omega\coth{(\beta\hbar\omega/2)}
+\end{align*}
+
+Actually, we can rewrite the expression above as 
+\begin{equation*}
+    \langle E\rangle=3\hbar\omega(n_B(\beta\hbar\omega)+1/2)
+\end{equation*}
+Where $n_B$ is the Bose occupation factor:
+\begin{equation*}
+    n_B(x)=\frac{1}{e^x-1}
+\end{equation*}
+The Bose occupation factor can be thought of as ``how many particles are in a certain state." 
+\newpage
+Why the Bose factor? Basically, we're treating quantum harmonic oscillators as bosons, or integer-spin particles. Thus we're also assuming that Pauli exclusion principle doesn't apply to these oscillators (which it definitely does for electrons, as we would see in the later parts of this chapter.) The concept of occupation factors will become important later on (mainly to simplify equations) when we're considering different types of particles.
+
+\vspace{0.25 in}
+
+Now, we will see the expression for heat capacity. Heat capacity is defined as the amount of change in energy for a certain amount of change in temperature. Thus, also remembering that $\beta=k_BT$, we find that:
+\begin{equation*}
+    C=\frac{\partial\langle E\rangle}{\partial T}=3k_B(\beta\hbar\omega)^2\frac{e^{\beta\hbar\omega}}{(e^{\beta\hbar\omega}-1)^2}
+\end{equation*}
+which is quite a gruesome expression.
+\vspace{0.25 in}
+
+Now, let's see what happens in two cases: the high temperature limit and the low temperature limit.
+
+\begin{itemize}
+    \item In the high temperature limit, we can consider $k_BT\gg\hbar\omega$. Then, $\beta\hbar\omega\rightarrow0$. Expanding the Taylor series for the exponential terms in $C$ gives us
+    \begin{equation*}
+        C\approx3k_B(\beta\hbar\omega)^2\frac{1}{(\beta\hbar\omega)^2}=3k_B
+    \end{equation*}
+    which perfectly fits the Dulong-Petit Law. As such, the Einstein model is accurate in predicting heat capacities in materials with low oscillation frequency.
+    \item In the low temperature limit, however, the heat capacity quickly drops to zero due to the exponential term in the denominator. It doesn't follow the cubic correspondence seen in experiments.
+\end{itemize}
+The Einstein model has some flaws, mainly because it only considers one common frequency for every particles. We only consider one value of $\omega$, which causes the predicted ``die-off" in low temperatures according to the model. Fortunately there is a better way to do things, in the form of the Debye model.
+\newpage
+\subsection{Debye model}
+In the Debye model, we're not assuming that all oscillators oscillate at the same frequencies, but rather we're considering a wide range of normal modes. Essentially, Debye considers that atomic oscillations should be quantized the same way as light is quantized, but with the difference being that light has two polarizations that corresponds to the transversal modes, whereas the atomic oscillations have three, with the extra being the longitudinal mode. For the sake of simplicity, however, we consider the three polarizations to be propagating with the same velocity (which irl is not really true most of the time).
+
+\vspace{0.25 in}
+
+For the derivations, we implement Born-von-Karman boundary conditions. Simply put, we consider that the atomic oscillations are waves that are periodic-L. In one dimension, we can think of it as a function lying on a circular string with circumference $L$. The position repeats every length $L$, and for a wavefunction $\psi$ on the string at position $r$, 
+\begin{equation*}
+    \psi(r)=\psi(r+L)
+\end{equation*}
+is assumed to hold true.
+
+\vspace{0.25 in}
+
+If we consider the usual form for waves which is  $\psi(r)=e^{ikr}$ where $k$ is the wave vector, we get that the Born-von-Karman condition imply
+\begin{equation*}
+    e^{ikL}=1\implies kL=2\pi n\text{\hspace{0.25 in}where $n\in\mathbb{Z}$}
+\end{equation*}
+or in a nicer form,
+\begin{equation*}
+    k=\frac{2\pi n}{L}
+\end{equation*}
+In 3-dimensions, we basically have that in a cube with vertices $L$,
+\begin{equation*}
+    \vec{k}=\frac{2\pi}{L}(n_1,n_2,n_3)
+\end{equation*}
+where $n_1,n_2,n_3$ corresponds to the 3 different  directions that are perpendicular to each other (which is basically x, y, and z if you're a bit lazy to think).
+
+\vspace{0.25 in}
+
+Debye's idea was that the frequency of oscillation is a function of the wave vector, and that we should sum over all possible $\vec{k}$ to get the right total energy of the system. Einstein has given us the energy expression for one oscillation frequency, and thus to get the corrected value,
+\begin{equation*}
+    \langle E\rangle=\sum_{\vec{k}}3\hbar\omega(n_B(\beta\hbar\omega)+1/2)
+\end{equation*}
+Evaluating sums like this might not be a good idea to do directly, so I will introduce a small trick to simplify our derivation.
+
+\newpage
+
+Let us go back to the one-dimensional case. In $k$-space, basically each points of $k$ occupies a space of ``length" $2\pi /L$ on the line. As $L$ becomes large, we have that each $k$-points behave like points in $\mathbb{R}$. Hence, we can transform the sum into
+\begin{equation*}
+    \sum_{k}\rightarrow\frac{L}{2\pi}\int_{-\infty}^{+\infty}dk
+\end{equation*}
+which is a better thing to work with than sums.
+
+\vspace{0.25 in}
+
+The same idea can be applied to the three-dimensional case. Instead of occupying a line-space, each values of $\vec{k}$ occupies a volume-space, which can be described as a cube having vertices of length $2\pi /L$. As such, the cube has volume $(2\pi / L)^3$. Using the same analogy, we get that the sum becomes
+\begin{equation*}
+    \sum_{\vec{k}}\rightarrow\frac{L^3}{(2\pi)^3}\int d^3k
+\end{equation*}
+where I have used the notation $\int d^3k=\iiint dk_1dk_2dk_3$ for simplicity. Basically, a volume integral over the three dimensions in $k$-space.
+
+\vspace{0.25 in}
+
+Invoking spherical symmetry in $k$-space, the integral can be transformed into
+\begin{equation*}
+    4\pi\int_0^\infty dk\hspace{0.1 in}k^2
+\end{equation*}
+where this $k$ in the integral is a magnitude of the vector $\vec{k}$ that we had earlier (the notation can be a bit confusing at times, I know, I feel you). Intuition-wise, this is like a ball with radius $|\vec{k}|$.
+
+\vspace{0.25 in}
+
+Now, our expression for energy becomes
+\begin{equation*}
+    \langle E\rangle=(\frac{L}{2\pi})^3\int d^3k\hspace{0.1 in}3\hbar\omega(n_B(\beta\hbar\omega)+1/2)=3\frac{4\pi L^3}{(2\pi)^3}\int_0^{\infty}dk\hspace{0.1 in}k^2\hbar\omega(n_B(\beta\hbar\omega)+1/2)
+\end{equation*}
+which is also quite a gruesome expression.
+
+\vspace{0.25 in}
+
+A key feature of the Debye model is it's assumed that the oscillation frequency follows the dispersion relation $\omega(\vec{k})=v|\vec{k}|=vk$ where $v$ is the speed of propagation of the wave. We can then substitute $k=\omega/v$ to our expression and get
+\begin{equation*}
+    \langle E\rangle=3\frac{4\pi L^3}{(2\pi)^3}\int_0^{\infty}\omega^2d\omega(1/v^3)\hbar\omega(n_B(\beta\hbar\omega)+1/2)
+\end{equation*}
+
+\newpage
+We now introduce a concept called ``density of states", which we will denote by $g(\omega)$. Basically, $g(\omega)d\omega$ is the amount of allowed states between $\omega$ and $\omega+d\omega$. In this case, we define the density of states as
+\begin{equation*}
+    g(\omega)=3\frac{4\pi L^3}{(2\pi)^3}\frac{\omega^2}{v^3}
+\end{equation*}
+
+\vspace{0.25 in}
+
+We can do a bit of more simplification. Using the fact that in a box of volume $L^3$ that contains $N$ particles, we define the density $n=N/L^3$. Also, we define something called the Debye frequency, which is $\omega_D=(6\pi^2nv^3)^{1/3}$. We now get
+\begin{equation*}
+    g(\omega)=N\frac{9\omega^2}{\omega_D^3}
+\end{equation*}
+
+\vspace{0.25 in}
+
+After this, we can substitute it to the expression for energy. We will then get that
+\begin{equation*}
+    \langle E\rangle=\int_0^\infty g(\omega)d\omega\hspace{0.1in} \hbar\omega(n_B(\beta\hbar\omega)+1/2)
+\end{equation*}
+
+An intuitive view for processing all of this is that  basically the integral says: "The total energy of the system is the sum over energy-per-state (all of the terms on the right of $d\omega$ in the integral) all possible states (implied by the density of states function)". I think this is quite cool, and a nice way to view complicated expressions in physics. 
+
+\vspace{0.25 in}
+
+Now, let's actually try and evaluate the integral. Subbing the density of states back to the integral gives us
+\begin{equation*}
+    \langle E\rangle=\frac{9N\hbar}{\omega_D^3}\int_0^\infty d\omega\hspace{0.1in} \omega^3(n_B(\beta\hbar\omega)+1/2)=\frac{9N\hbar}{\omega_D^3}\left[\int_0^\infty d\omega\hspace{0.1in} \omega^3n_B(\beta\hbar\omega)+\int_0^\infty d\omega\hspace{0.1in} \frac{\omega^3}{2}\right]
+\end{equation*}
+Notice that the second integral will evaluate to infinity, which is definitely not a great sign. I will denote the infinity as $E_{inf}$, but the term $E_{zero}$ might be more useful for later concepts. This term is not dependent of temperature.
+\vspace{0.25 in}
+
+Let's try and compute the heat capacity. First we'll evaluate the energy:
+\begin{align*}
+    \langle E\rangle&=\frac{9N\hbar}{\omega_D^3}\left[\int_0^\infty d\omega\hspace{0.1in} \omega^3n_B(\beta\hbar\omega)+\int_0^\infty d\omega\hspace{0.1in} \frac{\omega^3}{2}\right]\\
+    &=\frac{9N\hbar}{\omega_D^3}\int_0^\infty\frac{\omega^3}{e^{\beta\hbar\omega}-1} d\omega\hspace{0.1 in}+E_{inf}\\
+    &=\frac{9N\hbar}{\omega_D^3(\beta\hbar)^4}\int_0^\infty \frac{(\beta\hbar\omega)^3}{e^{\beta\hbar\omega}-1}d(\beta\hbar\omega) + E_{inf} \\
+    &=\frac{9Nk_B^4\pi^4}{15(\hbar\omega_D)^3}T^4 + E_{inf}
+\end{align*}
+Notice that if we differentiate it one time with respect to temperature, we get that $C\sim T^3$. The Debye model is accurate for low temperatures but at high temperatures, the heat capacity blows up. It doesn't fit the Dulong-Petit law, so we'll need a little fix to the model.
+
+\vspace{0.25 in}
+
+We will introduce a cut-off frequency, which we'll denote by $\omega_c$. Debye postulated that the amount of normal modes should be the same as the degree of freedom in our object. In this case, we have $N$ particles with 3 motion direction. Hence, we should have a total normal mode of $3N$. Mathematically, it's described with the integral of density of state:
+\begin{equation*}
+    3N=\int_0^{\omega_c}g(\omega)d\omega
+\end{equation*}
+
+Let's check the high-temperature limit. Here, $k_BT\gg\hbar\omega$, therefore $n_B(\beta\hbar\omega)\rightarrow(\beta\hbar\omega)^{-1}$. Substituting this back into the equation gives us
+\begin{align*}
+    \langle E\rangle&=\int_0^{\omega_c}g(\omega)d\omega\hspace{0.1in}\hbar\omega(\frac{k_BT}{\hbar\omega}+1/2)\\
+    &=\int_0^{\omega_c}g(\omega)d\omega\hspace{0.1in}k_BT + \frac{1}{2}\int_0^{\omega_c}g(\omega)d\omega\hspace{0.1in}\hbar\omega\\
+    &=3Nk_BT+E_{zero}
+\end{align*}
+Notice that this ``tweak" we imposed gives us the Dulong-Petit law. Also notice that by imposing a cut-off, we got rid of the infinity (hence why I wrote it as $E_{zero}$ now instead of $E_{inf}$).
+
+\vspace{0.25 in}
+
+Now one may think, what is the value of the cut-off frequency? We can try and evaluate it from our initial assumption, which is that the total normal mode is the same as the degree of freedom. Let's evaluate the integral:
+\begin{equation*}
+    3N=\int_0^{\omega_{c}}g(\omega)d\omega=\int_0^{\omega_c}\frac{9N\omega^2}{\omega_D^3}d\omega=3N\frac{\omega_c^3}{\omega_D^3}\implies\omega_c=\omega_D
+\end{equation*}
+Wow, it turns out that the cut-off frequency is our proposed Debye frequency!
+
+\newpage
+
+\subsection{Drude model}
+The Drude model of conductivity treats metals as a sea of electrons that scatter off of each-other. This is a direct application of kinetic theory. Before doing any calculations, we must impose a few assumptions:
+\begin{itemize}
+    \item The average time between collisions, or called \textit{scattering time}, is denoted by $\tau$. The probability of an electron being scattered in a time interval $dt$ is given by $\frac{dt}{\tau}$
+    \item After scattering happens, the electron becomes stationary
+    \item In between scattering events, electrons respond to external forces (which in the cases we will see, the $\vec{E}$ and $\vec{B}$ fields)
+\end{itemize}
+With these assumptions in play, we can now formulate the Drude model.
+
+\vspace{0.25 in}
+
+
+We have an electron (charge $-e$) that has momentum $\vec{p}(t)$ at time $t$ moving in the presence of a force $\vec{F}$. I will denote the probability of a particular event $S$ as $\pi_S$. After a time interval $dt$, the average momentum of the electron becomes:
+\begin{equation*}
+    \langle \vec{p}(t+dt)\rangle=\sum_S \pi_S\vec{p}_S(t+dt)=\frac{dt}{\tau}\vec{0}+(1-\frac{dt}{\tau})(\vec{p}(t)+\vec{F}dt)
+\end{equation*}
+The first term corresponds to the scattering event, and the second term corresponds to when scattering doesn't happen. When scattering doesn't happen, as we have stated in our initial assumption, the electron is affected by external forces. We now have
+\begin{equation*}
+    \langle \vec{p}(t+dt)\rangle=\vec{p}(t)-\frac{dt}{\tau}\vec{p}(t)+\vec{F}dt+O(dt^2)
+\end{equation*}
+As $dt$ is taken to be infinitesimally small, we can ignore the quadratic term in the end. Subtracting both sides by $\vec{p}(t)$ and dividing the equation by $dt$, we will get that
+\begin{equation*}
+     \frac{\langle \vec{p}(t+dt)\rangle-\vec{p}(t)}{dt}=\frac{d\vec{p}}{dt}=\vec{F}-\frac{\vec{p}(t)}{\tau}
+\end{equation*}
+This is the jist of the whole model. Usually, we would want to look how the system behaves under the influence of electric and magnetic fields. Thus, we can say that the force is given by the Lorentz force $\vec{F}=-e(\vec{E}+\vec{v}\times\vec{B})$. We will see some special cases.
+
+\newpage
+
+First, the case where magnetic field is absent. This might interest us as this is (approximately) what happens in wires. In the absence of magnetic field, the equation becomes
+\begin{equation*}
+    \frac{d\vec{p}}{dt}=-e\vec{E}-\frac{\vec{p}}{\tau}
+\end{equation*}
+It may be useful to take a look at the steady state of the function, or in other words, $\frac{d\vec{p}}{dt}=0$. Steady state conditions gives us
+\begin{equation*}
+    \vec{p}+e\tau\vec{E}=0\implies \vec{v}+\frac{e\tau}{m}\vec{E}=0\implies \vec{v}=-\frac{e\tau}{m}\vec{E}
+\end{equation*}
+Recall from electrodynamics, the current density is given by $\vec{J}=-ne\vec{v}$ where $n$ is the number of electrons per volume. Inputting the expression we got from the force calculation to the current density gives us
+\begin{equation*}
+    \vec{J}=\frac{ne^2\tau}{m}\vec{E}
+\end{equation*}
+Notice that this recovers Ohm's Law where the conductivity $\sigma_0=\frac{ne^2\tau}{m}$. This result is precisely in the DC-limit, ($\omega=0$).
+
+\vspace{0.25 in}
+
+We now wish to work with a time-dependent electric field characterized by $\vec{E}(\omega,t)=\Re(\vec{\tilde{E}}e^{i\omega t})$. Let us also assume an ansatz of the same form for the momentum of the electron,  $\vec{p}(\omega,t)=\Re(\vec{\tilde{p}}e^{i\omega t})$. To simplify our analysis, let us work with the complex forms of each variable, as we can just take the real part later on. Inputting our expressions for the E-field and the momentum to the equation of motion gives us
+\begin{equation*}
+    -i\omega \vec{\tilde{p}}=-e\vec{\tilde{E}}-\frac{\vec{\tilde{p}}}{\tau}
+\end{equation*}
+As by definition $\vec{J}=-ne\vec{v}$, we can also state $\vec{\tilde{J}}=\frac{-ne\vec{\tilde{p}}}{m}$. Then, the equation above turns into the equivalent form of
+\begin{equation*}
+    \vec{\tilde{J}}(\omega,t)=\frac{\sigma_0}{1-i\omega\tau}\vec{\tilde{E}}=\tilde{\sigma}(\omega)\vec{\tilde{E}}(\omega,t)
+\end{equation*}
+
+
+\newpage
+
+\subsection{The free Fermi gas}
+Solid state physics is mostly about electrons, so we should consider a fermionic model compared to a bosonic model. What is meant by ``free"? In this context, we ignore the electron-electron interactions, most obviously the Coulomb interaction. 
+
+\vspace{0.25in}
+
+A key feature of fermions is that they obey the Pauli exclusion principle. In short, two identical fermions cannot occupy the same state at the same time. In a system of bosons, the ground state can be constructed by simply having all of the particles in the lowest energy level available. However, we cannot do the same with fermions due to Pauli exclusion principle! We must fill the lowest energy level first, and then move up the ladder. Now we will take a closer look at the ground state of the free Fermi gas.
+
+\vspace{0.25in}
+
+Let us confine $N$ electrons to a cube of side length $L$. By employing the Born-von Karman boundary conditions, notice that each $\vec{k}$-state occupies a volume of $(2\pi/L)^3$ in k-space. In the limit where we have many electrons (i.e., $N$ is really large), then the filled states will make a sphere in k-space. Let us denote the sphere radius as $k_F$. We can find $k_F$ by simply equating the k-space volume of the sphere with the amount of states (in this case, $N$) times the k-space volume per state (in this case, $(2\pi/L)^3$. Hence, denoting $V=L^3$,
+\begin{equation*}
+    \frac{4}{3}\pi k_F^3=\frac{N(2\pi)^3}{V}\implies k_F=(6\pi^2n)^{1/3}
+\end{equation*}
+where $n$ is the electron density in real space. Notice that the value of $k_F$ only depends on the electron density in the material. If we have spin degeneracy, then $k_F$ becomes $(3\pi^2n)^{1/3}$.
+
+\vspace{0.25in}
+
+Basically, the sphere separates the filled electron levels with the unfilled electron levels. The boundary surface is called the Fermi surface. Intuitively, the highest energy state possibly occupied by an electron in the ground state of the system is given by $E(k_F)$ where $E(\vec{k})$ is the energy eigenvalue of an electron with wave-vector $\vec{k}$. We now define a term called as Fermi energy, $E_F$ which is
+\begin{equation*}
+    E_F=E(k_F)=\frac{\hbar^2k_F^2}{2m}
+\end{equation*}
+
+\vspace{0.25in}
+
+\newpage
+
+
+\section{Crystal Structure}
+Some fun stuff happens when things are ordered, so let's take a look at the structure of ordered things (which as you may have guessed from the section name, crystals)
+
+\subsection{Real-space lattice}
+(Insert some yaps here)
+
+\vspace{0.25in}
+
+A \textbf{Bravais lattice} is an (infinite) set of discrete points that are arranged and oriented such that it looks exactly the same regardless of POV. Mathematically, the points in a Bravais lattice can be represented as integer sums of \textbf{primitive lattice vectors}. Primitive lattice vectors ``gets us" from one lattice point to another with the shortest distances (we will see examples!). In 3-D, if we let the position of one of the points to be denoted as $\vec{R}$, then we will have that
+\begin{equation*}
+    \vec{R}=n_1\vec{a}_1+n_2\vec{a}_2+n_3\vec{a}_3
+\end{equation*}
+where $\vec{a}_1, \vec{a}_2, \vec{a}_3$ are the primitive lattice vectors and $n_1,n_2,n_3\in\mathbb{Z}$.
+
+\vspace{0.25in}
+
+Let's take a look at a 2-D case:
+
+\subsection{Reciprocal lattice}
+
+\subsection{Diffraction, the structure factor}
+
+\newpage
+
+\section{Phonons}
+Phonons are the quanta of vibration. Like how photons are the packets of electromagnetic vibrations, phonons are virtually packets of molecular vibrations. In this chapter, we will take a look at some models and specific cases of vibrations. 
+
+\subsection{One-dimensional particle chain}
+The first model that we are interested in is a 1-D simple monatomic chain. Basically, particles of mass $m$ are connected to neighboring particles with a spring of constant $\kappa$.
+
+\vspace{0.25in}
+
+Assume that in a stationary state, each particles are separated by length $a$. Then, if we assign each particles with a number $n\in\mathbb{Z}$, we get that the position of each particle in it's equilibrium is $x_{0,n}=na$. Now, let there be a displacement $\delta x_n$ such that the position of each particles $x_n=x_{0,n}+\delta x_n$. One can check that the laws of motion will give us
+\begin{equation*}
+    \partial^2_t\delta x_n=\frac{\kappa}{m}(\delta x_{n+1}-2\delta x_n+\delta x_{n-1})
+\end{equation*}
+
+Intuitively, the vibration we're dealing with is a traveling wave, so a good ansatz to use for this case is in the form of a traveling plane wave, given by
+\begin{equation*}
+    \delta x_n=Ae^{i(\omega t-kx_{0,n})}=Ae^{i(\omega t-kna)}
+\end{equation*}
+for some constant $A$.
+
+\vspace{0.25in}
+
+For simplicity, let $\omega_0^2=\kappa/m$. Implementing the ansatz into the equation of motion gives us
+\begin{equation*}
+    -\omega^2=\omega_0^2(e^{ika}+e^{-ika}-2)=2\omega_0^2(\cos{ka}-1)=-4\omega_0^2\sin^2{ka/2}
+\end{equation*}
+Hence, after simplifying, we get that the dispersion relation (or angular frequency $\omega$ as a function of wave-vector $k$) to be
+\begin{equation*}
+    \omega(k)=2\omega_0|\sin{(ka/2)} |
+\end{equation*}
+
+An interesting thing to take note is that when $k$ is small, we can approximate the whole expression to be a linear function of $k$. This is called the \textit{long-wavelength limit}. Debye assumed this for his derivation because sound waves' wavelengths are in the order of meters. 
+
+\subsection{One-dimensional alternating diatomic chain}
+
+\subsection{Tight-binding model}
+We now will finally incorporate quantum mechanics to the discussion of lattice vibrations. For simplicity, we will only talk about 1-dimensional lattices, or chains.
+
+
+
+\newpage
+
+
+\section{Electronic Properties}
+
+\subsection{Review of the tight-binding model}
+
+\subsection{Bloch's Theorem and the Kronig-Penney model}
+
+\subsection{Band structure}
+
+\section{Magnetism}
+
+\subsection{}
+
+
+
+\end{document}
